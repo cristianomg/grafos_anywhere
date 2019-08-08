@@ -9,4 +9,6 @@ if menu == 1:
 	grafo.adicionar_arestas(('v1','v2'),('v1','v3'),('v2','v3'))
 	print('Vertices:', grafo.vertices)
 	print('Arestas:', grafo.arestas)
-	print('Adjacentes:', grafo.adjacentes('v1'))
+	print('Adjacentes:', grafo.adjacentes('v3'))
+	print(f'É completo: {grafo.ehCompleto()}')
+	print(f'É regular: {grafo.ehRegular()}')

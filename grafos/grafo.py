@@ -9,6 +9,8 @@ class Grafo:
 		self.__lista_de_Arestas = []
 		self.__lista_de_Adjacentes = {}
 		self.__direcionado = direcionado
+		self.__regular = False
+		self.__completo = False
 
 	@property
 	def vertices(self):
@@ -107,3 +109,36 @@ class Grafo:
 				return vertice
 		else:
 			return None
+
+	def ehCompleto(self):
+		"""
+		verifica se o grafo é completo
+		caso o grafo seja completo  retorna True
+		caso o grafo não seja completo retorna False
+
+		"""
+		for vertice, adjacentes in self.__lista_de_Adjacentes.items():
+			if adjacentes.tamanho == len(self.vertices)-1:
+				self.__completo = True
+			else:
+				self.__completo = False
+		return self.__completo
+
+	def ehRegular(self):
+		"""
+		Verifica se o grafo é regular.
+
+		Caso seja regular retorna True.
+
+		Caso não seja regular retorna False.
+
+		"""
+
+		for v, adjacentes in self.__lista_de_Adjacentes.items():
+			for i, j in self.__lista_de_Adjacentes.items():
+				if adjacentes.tamanho == j.tamanho:
+					self.__regular = True
+				else:
+					self.__regular = False
+					return self.__regular
+		return self.__regular
