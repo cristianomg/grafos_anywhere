@@ -159,7 +159,9 @@ class Grafo:
             vertice.visitado = True
             for i in range(len(self.__lista_de_Adjacentes[vertice.nome])):
                 if not self.__lista_de_Adjacentes[vertice.nome][i].visitado:
-                    self.pilha.empilhar(self.__lista_de_Adjacentes[vertice.nome][i])
-            l.append(vertice.nome)
+                    if not self.pilha.contem(self.__lista_de_Adjacentes[vertice.nome][i]):
+                        self.pilha.empilhar(self.__lista_de_Adjacentes[vertice.nome][i])
+            if vertice.nome not in l:
+                l.append(vertice.nome)
             print(self.pilha)
         return l
