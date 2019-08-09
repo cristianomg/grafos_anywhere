@@ -45,7 +45,7 @@ class Grafo:
 		"""
 		return self.__lista_de_Adjacentes[vertice]
 
-	def adicionar_vertice(self, *vertices): 
+	def adicionar_vertice(self, vertices): 
 		"""
 		adiciona os vertices no grafo.
 
@@ -55,7 +55,7 @@ class Grafo:
 		self.__lista_de_Vertices = [Vertice(nome) for nome in vertices]
 		self.__criar_lista_adjacentes()
 	
-	def adicionar_arestas(self, *arestas):
+	def adicionar_arestas(self, arestas):
 		"""		
 		adiciona as arestas no grafo.
 		
