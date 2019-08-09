@@ -1,144 +1,165 @@
+from estruturas_de_dados import lista_ligada
+from estruturas_de_dados import pilha
 from .aresta import Aresta
 from .vertice import Vertice
-from estruturas_de_dados import lista_ligada
+
 
 class Grafo:
 
-	def __init__(self, direcionado=False):
-		self.__lista_de_Vertices = []
-		self.__lista_de_Arestas = []
-		self.__lista_de_Adjacentes = {}
-		self.__direcionado = direcionado
-		self.__regular = False
-		self.__completo = False
+    def __init__(self, direcionado=False):
+        self.__lista_de_Vertices = []
+        self.__lista_de_Arestas = []
+        self.__lista_de_Adjacentes = {}
+        self.__direcionado = direcionado
+        self.__regular = False
+        self.__completo = False
+        self.pilha = None
 
-	@property
-	def vertices(self):
-		"""
-		retorna uma lista contendo os vertices adicionados ao grafo.
+    @property
+    def vertices(self):
+        """
+        retorna uma lista contendo os vertices adicionados ao grafo.
 
-		"""
-		return [vertice.__str__() for vertice in self.__lista_de_Vertices]
-	
-	@property
-	def arestas(self):
-		"""
-		retorna uma lista contendo uma tupla com os pontos de cada aresta adicionada ao Grafo.
+        """
+        return [vertice.__str__() for vertice in self.__lista_de_Vertices]
 
-		"""
-		return [aresta.__str__() for aresta in self.__lista_de_Arestas]
+    @property
+    def arestas(self):
+        """
+        retorna uma lista contendo uma tupla com os pontos de cada aresta adicionada ao Grafo.
 
-	@property
-	def digrafo(self):
-		'''
-		Retorna True se for digrafo e False se não for digrafo.
+        """
+        return [aresta.__str__() for aresta in self.__lista_de_Arestas]
 
-		'''
-		return self.__direcionado
+    @property
+    def digrafo(self):
+        '''
+        Retorna True se for digrafo e False se não for digrafo.
 
-	def adjacentes(self, vertice):
-		"""
-		Retorna a lista de adjacentes de um determinado vertice.
+        '''
+        return self.__direcionado
 
-		Exemplo: grafo.adjacentes('v1') --- retorn [v2,v3].
+    def getAdjacentes(self, vertice):
+        """
+        Retorna a lista de adjacentes de um determinado vertice.
 
-		"""
-		return self.__lista_de_Adjacentes[vertice]
+        Exemplo: grafo.adjacentes('v1') --- retorn [v2,v3].
 
-	def adicionar_vertice(self, vertices): 
-		"""
-		adiciona os vertices no grafo.
+        """
+        return [i.__str__() for i in self.__lista_de_Adjacentes[vertice]]
 
-		parametros: nome dos vertices --> 'v1','v2','v3' ... 
-		
-		"""
-		self.__lista_de_Vertices = [Vertice(nome) for nome in vertices]
-		self.__criar_lista_adjacentes()
-	
-	def adicionar_arestas(self, arestas):
-		"""		
-		adiciona as arestas no grafo.
-		
-		parametros: Tupla com os vertices participantes ---> ('v1','v2'), ('v1','v3'), ('v2','v3').
-		
-		após adicionar as arestas ao grafo  chama a função __set_adjacentes()
-		"""
-		self.__lista_de_Arestas = [Aresta(aresta[0], aresta[1]) for aresta in arestas]
-		self.__set_adjacentes()
+    def adicionar_vertice(self, vertices):
+        """
+        adiciona os vertices no grafo.
 
-	def __criar_lista_adjacentes(self):
-		"""
-		Cria um dicionario onde a chave é um vertice e o valor instancia uma lista ligada.
+        parametros: nome dos vertices --> 'v1','v2','v3' ...
 
-		"""
-		for i in self.__lista_de_Vertices:
-			self.__lista_de_Adjacentes[i.nome] = lista_ligada.ListaLigada()
+        """
+        self.__lista_de_Vertices = [Vertice(nome) for nome in vertices]
+        self.__criar_lista_adjacentes()
 
-	def __set_adjacentes(self):
-		"""
-		Seta as adjacencias na lista de adjacencias,  a partir das arestas adicionadas
-		Para cada vertice do grafo será inserido, na lista ligada que foi instanciada na função __criar_lista_adjacentes, os seus respectivos vertices adjacentes.all
+    def adicionar_arestas(self, arestas):
+        """
+        adiciona as arestas no grafo.
 
-		                           -------- Exemplo --------
-		Aresta(v1,v2)
+        parametros: Tupla com os vertices participantes ---> ('v1','v2'), ('v1','v3'), ('v2','v3').
 
-		lista_de_adjacentes = {
-			'v1': v2
-			'v2': v1
-		}		
+        após adicionar as arestas ao grafo  chama a função __set_adjacentes()
+        """
+        self.__lista_de_Arestas = [Aresta(aresta[0], aresta[1]) for aresta in arestas]
+        self.__set_adjacentes()
 
-		"""
-		if self.__direcionado == False:
-			for aresta in self.__lista_de_Arestas:
-				self.__lista_de_Adjacentes[aresta.pontoA].inserir(self.__select_vertice(aresta.pontoB))
-				self.__lista_de_Adjacentes[aresta.pontoB].inserir(self.__select_vertice(aresta.pontoA))
-			#print(type(self.__lista_de_Adjacentes['v1'].recuperar_elemento_no(0))) # teste
-		else:
-			for aresta in self.__lista_de_Arestas:
-				self.__lista_de_Adjacentes[aresta.pontoA].inserir(self.__select_vertice(aresta.pontoB))
+    def __criar_lista_adjacentes(self):
+        """
+        Cria um dicionario onde a chave é um vertice e o valor instancia uma lista ligada.
 
-	def __select_vertice(self, nome_vertice):
-		"""
-		Seleciona um vertice da lista de vertices a partir do seu nome.
+        """
+        for i in self.__lista_de_Vertices:
+            self.__lista_de_Adjacentes[i.nome] = []
 
-		parametro: Nome do Vertice
-		Return: <grafos.vertice.Vertice object at 0x7f18966b2a90>
-		"""
-		for vertice in self.__lista_de_Vertices:
-			if vertice.nome == nome_vertice:
-				return vertice
-		else:
-			return None
+    def __set_adjacentes(self):
+        """
+        Seta as adjacencias na lista de adjacencias,  a partir das arestas adicionadas
+        Para cada vertice do grafo será inserido, na lista ligada que foi instanciada na função __criar_lista_adjacentes, os seus respectivos vertices adjacentes.all
 
-	def ehCompleto(self):
-		"""
-		verifica se o grafo é completo
-		caso o grafo seja completo  retorna True
-		caso o grafo não seja completo retorna False
+                                   -------- Exemplo --------
+        Aresta(v1,v2)
 
-		"""
-		for vertice, adjacentes in self.__lista_de_Adjacentes.items():
-			if adjacentes.tamanho == len(self.vertices)-1:
-				self.__completo = True
-			else:
-				self.__completo = False
-		return self.__completo
+        lista_de_adjacentes = {
+            'v1': v2
+            'v2': v1
+        }
 
-	def ehRegular(self):
-		"""
-		Verifica se o grafo é regular.
+        """
+        if self.__direcionado == False:
+            for aresta in self.__lista_de_Arestas:
+                self.__lista_de_Adjacentes[aresta.pontoA].append(self.__select_vertice(aresta.pontoB))
+                self.__lista_de_Adjacentes[aresta.pontoB].append(self.__select_vertice(aresta.pontoA))
+        else:
+            for aresta in self.__lista_de_Arestas:
+                self.__lista_de_Adjacentes[aresta.pontoA].append(self.__select_vertice(aresta.pontoB))
 
-		Caso seja regular retorna True.
+    def __select_vertice(self, nome_vertice):
+        """
+        Seleciona um vertice da lista de vertices a partir do seu nome.
 
-		Caso não seja regular retorna False.
+        parametro: Nome do Vertice
+        Return: <grafos.vertice.Vertice object at 0x7f18966b2a90>
+        """
+        for vertice in self.__lista_de_Vertices:
+            if vertice.nome == nome_vertice:
+                return vertice
+        else:
+            return None
 
-		"""
+    def ehCompleto(self):
+        """
+        verifica se o grafo é completo
+        caso o grafo seja completo  retorna True
+        caso o grafo não seja completo retorna False
 
-		for v, adjacentes in self.__lista_de_Adjacentes.items():
-			for i, j in self.__lista_de_Adjacentes.items():
-				if adjacentes.tamanho == j.tamanho:
-					self.__regular = True
-				else:
-					self.__regular = False
-					return self.__regular
-		return self.__regular
+        """
+        for vertice, adjacentes in self.__lista_de_Adjacentes.items():
+            if len(adjacentes) == len(self.__lista_de_Vertices) - 1:
+                self.__completo = True
+            else:
+                self.__completo = False
+        return self.__completo
+
+    def ehRegular(self):
+        """
+        Verifica se o grafo é regular.
+
+        Caso seja regular retorna True.
+
+        Caso não seja regular retorna False.
+
+        """
+
+        for v, adjacentes in self.__lista_de_Adjacentes.items():
+            for i, j in self.__lista_de_Adjacentes.items():
+                if len(adjacentes) == len(j):
+                    self.__regular = True
+                else:
+                    self.__regular = False
+                    return self.__regular
+        return self.__regular
+
+    def dfs(self, vertice):
+
+        for i in self.__lista_de_Vertices:
+            i.visitado = False
+        l = []
+        self.pilha = pilha.Pilha()
+        vertice = self.__select_vertice(vertice)
+        vertice.visitado = True
+        self.pilha.empilhar(vertice)
+        while self.pilha.tamanho != 0:
+            vertice = self.pilha.desempilhar()
+            vertice.visitado = True
+            for i in range(len(self.__lista_de_Adjacentes[vertice.nome])):
+                if not self.__lista_de_Adjacentes[vertice.nome][i].visitado:
+                    self.pilha.empilhar(self.__lista_de_Adjacentes[vertice.nome][i])
+            l.append(vertice.nome)
+            print(self.pilha)
+        return l

@@ -38,10 +38,11 @@ print('-'*33, 'MENU DE FUNÇÕES', '-'*33)
 print('1 - getAdjacentes')
 print('2 - ehRegular')
 print('3 - ehCompleto')
+print('4 - teste da busca em profundidade')
 menu = int(input('Digite uma opção: '))
 if menu == 1:
 	var = input('Insira o nome do vertice que deseja verificar os adjacentes: ')
-	print(f'Adjacentes: {grafo.adjacentes(var)}')
+	print(f'Adjacentes: {grafo.getAdjacentes(var)}')
 	
 elif menu == 2:
 	print(f'É regular: {grafo.ehRegular()}')
@@ -50,4 +51,4 @@ elif menu ==3:
 	print(f'É completo: {grafo.ehCompleto()}')
 
 elif menu == 4:
-	grafo.
+	print(grafo.dfs('v1'))

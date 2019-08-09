@@ -1,5 +1,5 @@
 {
-"vertices": "v1,v2,v3",
-"arestas": "v1-v2,v1-v3,v2-v3"
+"vertices": "v1,v2,v3,v4",
+"arestas": "v1-v2,v1-v4,v2-v3,v3-v4"
 	
  }

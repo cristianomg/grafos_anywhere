@@ -1,7 +1,9 @@
-from listas import lista_duplamente_ligada
+from .lista_ligada import ListaLigada
+
+
 class Pilha:
 	def __init__(self):
-		self.__elementos = lista_duplamente_ligada.ListaDuplamenteLigada()
+		self.__elementos = ListaLigada()
 
 	@property
 	def tamanho(self):

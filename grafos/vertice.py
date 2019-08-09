@@ -14,7 +14,7 @@ class Vertice:
 
 	@visitado.setter
 	def visitado(self, booleano):
-		self.visitado = booleano
+		self.__visitado = booleano
 
 	def __str__(self):
 		return self.__nome
