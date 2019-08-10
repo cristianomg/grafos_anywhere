@@ -91,7 +91,7 @@ class Grafo:
         }
 
         """
-        if self.__direcionado == False:
+        if not self.__direcionado:
             for aresta in self.__lista_de_Arestas:
                 self.__lista_de_Adjacentes[aresta.pontoA].append(self.__select_vertice(aresta.pontoB))
                 self.__lista_de_Adjacentes[aresta.pontoB].append(self.__select_vertice(aresta.pontoA))
@@ -146,7 +146,6 @@ class Grafo:
         return self.__regular
 
     def dfs(self, vertice):
-
         for i in self.__lista_de_Vertices:
             i.visitado = False
         l = []
@@ -165,3 +164,7 @@ class Grafo:
                 l.append(vertice.nome)
             print(self.pilha)
         return l
+
+    def representacao(self):
+        for vertice, adjacentes in self.__lista_de_Adjacentes.items():
+            print(f'Vertice: "{vertice}" - Adjacentes: "{adjacentes}"')

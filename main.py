@@ -1,54 +1,31 @@
 from grafos import grafo
-import json
+import util
 
-####################Entrada de dados#########################
+vertices, arestas, direcionado = util.iniciar_dados()
+util.printar_inicialização(vertices, arestas)
 
-with open('grafo.json') as f:    
-	data = json.load(f)
-vertices = data['vertices'].split(",")
-
-arestas = [tuple(aresta.split('-')) for aresta in data['arestas'].split(',')]
-
-grafo = grafo.Grafo()
+grafo = grafo.Grafo(direcionado)
 grafo.adicionar_vertice(vertices)
 grafo.adicionar_arestas(arestas)
 
-print('-'*30, 'CONFIGURAÇÃO DO JSON', '-'*30)
-print('Vertices: ',end="")
-for n, i in	enumerate(vertices):
-	if n == len(vertices)-1:
-		print(i,end="")
-	else:
-		print(i,end=", ")
-print()
-print('Arestas: ',end="")
-
-for n,i in enumerate(arestas):
-	if n == len(arestas)-1:
-		print(i[0],"--",i[1],end="")
-	else:
-		print(i[0],"--",i[1],end=", ")
-print()
-print()
-
-#############################################################
-
-
 print('-'*33, 'MENU DE FUNÇÕES', '-'*33)
-print('1 - getAdjacentes')
-print('2 - ehRegular')
-print('3 - ehCompleto')
-print('4 - teste da busca em profundidade')
+print('1 - Representação do grafo')
+print('2 - getAdjacentes')
+print('3 - ehRegular')
+print('4 - ehCompleto')
+print('5 - teste da busca em profundidade')
 menu = int(input('Digite uma opção: '))
 if menu == 1:
+	grafo.representacao()
+elif menu == 2:
 	var = input('Insira o nome do vertice que deseja verificar os adjacentes: ')
 	print(f'Adjacentes: {grafo.getAdjacentes(var)}')
 	
-elif menu == 2:
+elif menu == 3:
 	print(f'É regular: {grafo.ehRegular()}')
 
-elif menu ==3:
+elif menu == 4:
 	print(f'É completo: {grafo.ehCompleto()}')
 
-elif menu == 4:
+elif menu == 5:
 	print(grafo.dfs('v1'))

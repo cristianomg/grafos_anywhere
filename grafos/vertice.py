@@ -1,6 +1,6 @@
 class Vertice:
 
-	def __init__(self, nome): # a inicialização recebe o nome do vertice como parametro
+	def __init__(self, nome):
 		self.__nome = nome
 		self.__visitado = False
 
@@ -19,4 +19,6 @@ class Vertice:
 	def __str__(self):
 		return self.__nome
 
+	def __repr__(self):
+		return self.__str__()
 

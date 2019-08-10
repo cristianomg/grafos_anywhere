@@ -1,6 +1,6 @@
 class Aresta:
 
-	def __init__(self, pontoA, pontoB): # a inicialização recebe os pontos adjacentes como parametros
+	def __init__(self, pontoA, pontoB):
 		self.__pontoA = pontoA
 		self.__pontoB = pontoB
 
