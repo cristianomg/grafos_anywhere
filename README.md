@@ -36,3 +36,4 @@ das funções solicitadas.
 2. getAdjacentes
 3. ehRegular
 4. ehCompleto
+5. ehConexo

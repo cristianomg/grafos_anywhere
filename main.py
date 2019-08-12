@@ -13,7 +13,7 @@ print('1 - Representação do grafo')
 print('2 - getAdjacentes')
 print('3 - ehRegular')
 print('4 - ehCompleto')
-print('5 - teste da busca em profundidade')
+print('5 - ehConexo')
 menu = int(input('Digite uma opção: '))
 if menu == 1:
 	grafo.representacao()
@@ -27,5 +27,5 @@ elif menu == 3:
 elif menu == 4:
 	print(f'É completo: {grafo.ehCompleto()}')
 
-elif menu == 5:
-	print(grafo.dfs('v1'))
+elif menu==5:
+	print(f'É Conexo: {grafo.ehConexo()}')
