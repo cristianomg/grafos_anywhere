@@ -14,26 +14,55 @@ os vertices do grafo. Na chave 'arestas' é declarado as arestas presentes no gr
 
 Exemplo de declaração
 
-Grafo direcionado = True
+Grafo direcionado
+ ```
+True
+```
 
-Vertices que serão declarados =  1,2,3,4.
 
-Arestas que serão declaradas =  1 ate 2 , 1 ate 3, 2 ate 4, 3 ate 4.
+Vertices que serão declarados
+````
+1,2,3,4
+````
+Arestas que serão declaradas
+```
+1 ate 2, 1 ate 3, 2 ate 4, 3 ate 4
+```
 
-Resultado no arquivo json = 
+
+Resultado no arquivo json
+
     {
         "direcionado": "True",
         "vertices": "v1,v2,v3,v4",
         "arestas": "v1-v2,v1-v3,v2-v4,v3-v4"
     }
-    
+ 
+
 ## Funções 
 
 Para testar as funções solicitadas no documento da atividade foi feito um menu ilustrativo onde cada opção escolhida executa uma
 das funções solicitadas.
 
-1. Representação do grafo
-2. getAdjacentes
-3. ehRegular
-4. ehCompleto
-5. ehConexo
+1- Representação do grafo
+```
+Retorna uma representação do grafo do tipo chave/valor
+```
+2- getAdjacentes
+```
+Retorna os adjacentes de um determinado vertice passado no paremetro
+```
+3- ehRegular
+```
+Retorna True se o grafo for regular e False se o grafo não for regular
+```
+4- ehCompleto
+```
+Retorna True se o grafo for completo e False se o grafo não for completo
+```
+5- ehConexo
+```
+Faz uma busca utilizando os algoritmos de busca em largura e busca em profundidade.
+Caso o resultado da busca sem fazer saltos for igual aos vertices do grafo retorna True caso não, retorna False.
+Os algoritmos são escolhidos no paremetro, por padrão utiliza o algoritmo bfs.  
+```
