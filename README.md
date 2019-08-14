@@ -38,6 +38,9 @@ Resultado no arquivo json
         "arestas": "v1-v2,v1-v3,v2-v4,v3-v4"
     }
  
+## Inicialização
+Para iniciar o programa, após configurar o grafo no arquivo json, execute o arquivo main.py
+
 
 ## Funções 
 
