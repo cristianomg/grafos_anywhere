@@ -41,6 +41,9 @@ Resultado no arquivo json
         "pesosAresta": [10,5,3,2,9,6,20,14,3,8,12,6,9,15,4,1,7,5]
     }
  
+## Inicialização
+Para iniciar o programa, após configurar o grafo no arquivo json, execute o arquivo main.py
+
 
 ## Funções 
 
