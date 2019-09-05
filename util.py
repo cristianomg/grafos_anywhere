@@ -6,12 +6,12 @@ def iniciar_dados():
         data = json.load(f)
     vertices = data['vertices'].split(",")
     arestas = [tuple(aresta.split('-')) for aresta in data['arestas'].split(',')]
-    direcionado = None
+    pesosArestas = data['pesosAresta']
     if data['direcionado'] == "True":
         direcionado = True
     else:
         direcionado = False
-    return vertices, arestas, direcionado
+    return vertices, arestas, direcionado, pesosArestas
 
 def printar_inicialização(vertices, arestas):
     print('-' * 30, 'CONFIGURAÇÃO DO JSON', '-' * 30)

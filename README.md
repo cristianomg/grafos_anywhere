@@ -28,14 +28,17 @@ Arestas que serão declaradas
 ```
 1 ate 2, 1 ate 3, 2 ate 4, 3 ate 4
 ```
-
+Pesos das arestas que serão declarados
+```Se o grafo possui 5 arestas necessita declarar 5 pesos.
+Exemplo [10,2,5,9,3]```
 
 Resultado no arquivo json
 
     {
-        "direcionado": "True",
-        "vertices": "v1,v2,v3,v4",
-        "arestas": "v1-v2,v1-v3,v2-v4,v3-v4"
+        "direcionado": "False",
+        "vertices": "b,j,t,k,w,x,y,z",
+        "arestas": "b-j,b-x,b-y,b-w,j-t,j-y,j-x,j-w,j-z,w-y,w-k,z-y,z-x,z-k,k-y,k-x,t-x,x-y",
+        "pesosAresta": [10,5,3,2,9,6,20,14,3,8,12,6,9,15,4,1,7,5]
     }
  
 
@@ -66,3 +69,7 @@ Faz uma busca utilizando os algoritmos de busca em largura e busca em profundida
 Caso o resultado da busca sem fazer saltos for igual aos vertices do grafo retorna True caso não, retorna False.
 Os algoritmos são escolhidos no paremetro, por padrão utiliza o algoritmo bfs.  
 ```
+6-Algoritmo do menor caminho
+````Essa função busca o menor caminho entre os os vertices do grafo. O mesmo pode ser configurado de 2 maneiras.
+A primeira forma será informado apenas o vertice de inicio e o algorimo irá mostrar o menor caminho para todos os vertices.
+A segunda forma será informado o vertice de inicio e o vertice final e o algoritmo ira mostrar todos os caminhos ate achar o menor caminho ate o vertice final ````

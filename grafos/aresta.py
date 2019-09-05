@@ -1,8 +1,9 @@
 class Aresta:
 
-	def __init__(self, pontoA, pontoB):
+	def __init__(self, pontoA, pontoB, peso):
 		self.__pontoA = pontoA
 		self.__pontoB = pontoB
+		self.__peso = peso
 
 
 	@property
@@ -13,5 +14,9 @@ class Aresta:
 	def pontoB(self):
 		return self.__pontoB
 
+	@property
+	def peso(self):
+		return self.__peso
+
 	def __str__(self):
-		return f'{self.__pontoA}-{self.__pontoB}'
+		return f'{self.__pontoA}-{self.__pontoB}: {self.__peso}'
