@@ -52,31 +52,36 @@ Para testar as funções solicitadas no documento da atividade foi feito um menu
 das funções solicitadas.
 
 1- Representação do grafo
-```
+
+<p>
 Retorna uma representação do grafo do tipo chave/valor
-```
+</p>
 2- getAdjacentes
-```
+
+<p>
 Retorna os adjacentes de um determinado vertice passado no paremetro
-```
+</p>    
 3- ehRegular
-```
+
+<p>
 Retorna True se o grafo for regular e False se o grafo não for regular
-```
+</p>
 4- ehCompleto
-```
+
+<p>
 Retorna True se o grafo for completo e False se o grafo não for completo
-```
+</p>
 5- ehConexo
-```
+<p>
+
 Faz uma busca utilizando os algoritmos de busca em largura e busca em profundidade.
 Caso o resultado da busca sem fazer saltos for igual aos vertices do grafo retorna True caso não, retorna False.
-Os algoritmos são escolhidos no paremetro, por padrão utiliza o algoritmo bfs.  
-```
-6-Algoritmo do menor caminho
-```
-Essa função busca o menor caminho entre os os vertices do grafo. O mesmo pode ser configurado de 2 maneiras.
-A primeira forma será informado apenas o vertice de inicio e o algorimo irá mostrar o menor caminho para todos os vertices.
+Os algoritmos são escolhidos no paremetro, por padrão utiliza o algoritmo bfs. </p>
+
+6- Algoritmo do menor caminho
+
+<p>Essa função busca o menor caminho entre os os vertices do grafo. O mesmo pode ser configurado de 2 maneiras.
+A primeira forma será informado apenas o vertice de inicio e o algorimo irá mostrar o menor caminho para todos os
+vertices.
 A segunda forma será informado o vertice de inicio e o vertice final e o algoritmo ira mostrar todos os caminhos
-ate achar o menor caminho ate o vertice final
-```
+ate achar o menor caminho ate o vertice final</p>
