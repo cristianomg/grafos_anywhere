@@ -77,5 +77,6 @@ Os algoritmos são escolhidos no paremetro, por padrão utiliza o algoritmo bfs.
 ```
 Essa função busca o menor caminho entre os os vertices do grafo. O mesmo pode ser configurado de 2 maneiras.
 A primeira forma será informado apenas o vertice de inicio e o algorimo irá mostrar o menor caminho para todos os vertices.
-A segunda forma será informado o vertice de inicio e o vertice final e o algoritmo ira mostrar todos os caminhos ate achar o menor caminho ate o vertice final ```
+A segunda forma será informado o vertice de inicio e o vertice final e o algoritmo ira mostrar todos os caminhos
+ate achar o menor caminho ate o vertice final
 ```
