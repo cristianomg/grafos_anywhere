@@ -227,13 +227,11 @@ class Grafo:
     def dijkstra(self, vInicial, vFinal=None):
         s, dist, path = [], {}, {}
         for x in self.__lista_de_Vertices:
-            x.visitado = False
             dist.update({x.nome: math.inf})
             path.update({x.nome: None})
         self.fila = fila.Fila()
         s.append(vInicial)
         dist[vInicial], path[vInicial], vertice = 0, vInicial, self.__select_vertice(vInicial)
-        vertice.visitado = True
         self.fila.enfilerar(vertice)
         if vFinal == None:
             while self.fila.tamanho >= 1:
@@ -243,15 +241,14 @@ class Grafo:
                     if aresta.peso + dist[v.nome] < dist[i.nome]:
                         dist[i.nome] = aresta.peso + dist[v.nome]
                         path[i.nome] = v
-                menor, elemento = math.inf, ""
+                menor, elemento, adicionar= math.inf, "", False
                 for i, j in dist.items():
-                    adicionar = False
                     if i not in s:
                         if j < menor:
-                            menor, elemento, adicionar = j, i, True
-                    if adicionar:
-                        s.append(elemento)
-                        self.fila.enfilerar(self.__select_vertice(elemento))
+                            menor, elemento, adicionar = j, i, True                        
+                if adicionar:
+                    s.append(elemento)
+                    self.fila.enfilerar(self.__select_vertice(elemento))
                 self.fila.desenfilerar()
         else:
             finalizar = False
@@ -262,17 +259,17 @@ class Grafo:
                     if aresta.peso + dist[v.nome] < dist[i.nome]:
                         dist[i.nome] = aresta.peso + dist[v.nome]
                         path[i.nome] = v
-                menor, elemento = math.inf, ""
+                menor, elemento, adicionar = math.inf, "", False
                 for i, j in dist.items():
-                    adicionar = False
+
                     if i not in s:
                         if j < menor:
                             menor, elemento, adicionar = j, i, True
-                    if adicionar:
-                        s.append(elemento)
-                        self.fila.enfilerar(self.__select_vertice(elemento))
-                    if elemento == vFinal:
-                        finalizar = True
+                if adicionar:
+                    s.append(elemento)
+                    self.fila.enfilerar(self.__select_vertice(elemento))
+                if s[len(s)-1] == vFinal:
+                    finalizar = True
                 self.fila.desenfilerar()
         self.__imprimirTabelaMenorCaminho(s, dist, path)
 
