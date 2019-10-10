@@ -16,6 +16,13 @@ class Vertice:
 	def visitado(self, booleano):
 		self.__visitado = booleano
 
+	def getGrauEntrada(self, listaArestas):
+		contadorGrau = 0
+		for aresta in listaArestas:
+			if aresta.pontoB == self.nome:
+				contadorGrau += 1
+		return contadorGrau
+
 	def __str__(self):
 		return self.__nome
 

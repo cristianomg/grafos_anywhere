@@ -1,7 +1,7 @@
 from estruturas_de_dados import pilha, fila
-from .aresta import Aresta
-from .vertice import Vertice
 import math
+from .vertice import Vertice
+from .aresta import Aresta
 
 
 class Grafo:
@@ -126,7 +126,7 @@ class Grafo:
         caso o grafo não seja completo retorna False
 
         """
-        for vertice, adjacentes in self.__lista_de_Adjacentes.items():
+        for adjacentes in self.__lista_de_Adjacentes.values():
             if len(adjacentes) == len(self.__lista_de_Vertices) - 1:
                 self.__completo = True
             else:
@@ -143,8 +143,8 @@ class Grafo:
 
         """
 
-        for v, adjacentes in self.__lista_de_Adjacentes.items():
-            for i, j in self.__lista_de_Adjacentes.items():
+        for adjacentes in self.__lista_de_Adjacentes.values():
+            for j in self.__lista_de_Adjacentes.values():
                 if len(adjacentes) == len(j):
                     self.__regular = True
                 else:
@@ -227,11 +227,13 @@ class Grafo:
     def dijkstra(self, vInicial, vFinal=None):
         s, dist, path = [], {}, {}
         for x in self.__lista_de_Vertices:
+            x.visitado = False
             dist.update({x.nome: math.inf})
             path.update({x.nome: None})
         self.fila = fila.Fila()
         s.append(vInicial)
         dist[vInicial], path[vInicial], vertice = 0, vInicial, self.__select_vertice(vInicial)
+        vertice.visitado = True
         self.fila.enfilerar(vertice)
         if vFinal == None:
             while self.fila.tamanho >= 1:
@@ -241,14 +243,15 @@ class Grafo:
                     if aresta.peso + dist[v.nome] < dist[i.nome]:
                         dist[i.nome] = aresta.peso + dist[v.nome]
                         path[i.nome] = v
-                menor, elemento, adicionar= math.inf, "", False
+                menor, elemento = math.inf, ""
                 for i, j in dist.items():
+                    adicionar = False
                     if i not in s:
                         if j < menor:
-                            menor, elemento, adicionar = j, i, True                        
-                if adicionar:
-                    s.append(elemento)
-                    self.fila.enfilerar(self.__select_vertice(elemento))
+                            menor, elemento, adicionar = j, i, True
+                    if adicionar:
+                        s.append(elemento)
+                        self.fila.enfilerar(self.__select_vertice(elemento))
                 self.fila.desenfilerar()
         else:
             finalizar = False
@@ -259,17 +262,17 @@ class Grafo:
                     if aresta.peso + dist[v.nome] < dist[i.nome]:
                         dist[i.nome] = aresta.peso + dist[v.nome]
                         path[i.nome] = v
-                menor, elemento, adicionar = math.inf, "", False
+                menor, elemento = math.inf, ""
                 for i, j in dist.items():
-
+                    adicionar = False
                     if i not in s:
                         if j < menor:
                             menor, elemento, adicionar = j, i, True
-                if adicionar:
-                    s.append(elemento)
-                    self.fila.enfilerar(self.__select_vertice(elemento))
-                if s[len(s)-1] == vFinal:
-                    finalizar = True
+                    if adicionar:
+                        s.append(elemento)
+                        self.fila.enfilerar(self.__select_vertice(elemento))
+                    if elemento == vFinal:
+                        finalizar = True
                 self.fila.desenfilerar()
         self.__imprimirTabelaMenorCaminho(s, dist, path)
 
@@ -277,3 +280,29 @@ class Grafo:
         print("{:<10}{:<10}{:<10}".format("Vertices", "Distancia", "Caminho"))
         for i in s:
             print("{:^10}{:^10}{:^10}".format(i, dist[i], str(path[i])))
+
+
+    #retorna a lista de arestas após a remoção do vertice de grau 0
+    def getListaVerticesRestantes(self, listaVertice ,listaArestas):
+        dic = {}
+        for vertice in listaVertice:
+            grauEntrada = vertice.getGrauEntrada(listaArestas)
+            dic[vertice.nome] = grauEntrada
+        lista = [self.__select_vertice(x) for x in sorted(dic, key = dic.get)]
+        return lista
+
+    #necessita de um grafo direcionado 
+    #ordena o grafo de acordo com as dependencias
+    def ordenacaoTopologica (self):
+        result = []
+        listaArestas = self.__lista_de_Arestas.copy()
+        listaVertice = self.__lista_de_Vertices.copy()
+        for vertice in self.__lista_de_Vertices:
+            listaVertice = self.getListaVerticesRestantes(listaVertice,listaArestas)
+            if len(listaVertice) >= 1:
+                listaArestas = list(filter(lambda x: x.pontoA != listaVertice[0].nome, listaArestas))
+                result.append(listaVertice[0].nome)
+                listaVertice.remove(listaVertice[0])
+            else:
+                break
+        print('{}'.format(' '.join(result)))
