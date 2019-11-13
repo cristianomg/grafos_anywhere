@@ -16,6 +16,7 @@ print('4 - ehCompleto')
 print('5 - ehConexo')
 print('6 - Algoritmo do menor caminho')
 print('7 - Ordenação Topologica')
+print('8 - Arvore Geradora Minima')
 menu = int(input('Digite uma opção: '))
 if menu == 1:
 	grafo.representacao()

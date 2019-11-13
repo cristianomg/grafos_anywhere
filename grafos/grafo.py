@@ -322,12 +322,13 @@ class Grafo:
                         menor = x.peso
             if (aresta.pontoA not in conjuntoB):
                  conjuntoB.append(aresta.pontoA)
+                 arvore.append(aresta)
             else:
                 conjuntoB.append(aresta.pontoB)
-            arvore.append(aresta)
+                arvore.append(aresta)
             if (len(conjuntoB) == len(self.__lista_de_Vertices)):
                 break
         return arvore
 
-    def buscaPorArticulacao(self):
-        
+    #def buscaPorArticulacao(self):
+
