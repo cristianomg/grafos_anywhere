@@ -46,3 +46,8 @@ elif menu == 6:
 		grafo.dijkstra(verticeInicio)
 elif menu == 7:
 	grafo.ordenacaoTopologica()
+elif menu == 8:
+	arvore = grafo.arvoreGeradoraMinima()
+	for x in arvore:
+		print (x)
+	

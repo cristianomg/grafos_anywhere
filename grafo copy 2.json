@@ -1,0 +1,6 @@
+{
+"direcionado": "True",
+"vertices": "m,n,o,p,q,r,s,t,u,v,w,x,y,z",
+"arestas": "m-r,m-q,m-x,n-q,n-u,n-o,o-r,o-v,o-s,p-s,p-z,q-t,r-u,r-y,s-r,u-t,v-x,v-w,w-z,y-v",
+"pesosAresta": [10,5,3,2,9,6,20,14,3,8,12,6,9,15,4,1,7,5,2,3,4]
+ }

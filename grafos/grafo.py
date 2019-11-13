@@ -1,7 +1,7 @@
-from estruturas_de_dados import pilha, fila
-import math
 from .vertice import Vertice
 from .aresta import Aresta
+from estruturas_de_dados import pilha, fila
+import math
 
 
 class Grafo:
@@ -306,3 +306,28 @@ class Grafo:
             else:
                 break
         print('{}'.format(' '.join(result)))
+
+    #retorna as arestas da arvore geradora minima
+    #necessita um grafo em forma de arvore
+    def arvoreGeradoraMinima(self):
+        conjuntoB = [self.__lista_de_Vertices[0].nome]
+        arvore = []
+        while True:
+            menor = float('inf')
+            aresta = None
+            for x in self.__lista_de_Arestas:
+                if (x.pontoA in conjuntoB and x.pontoB not in conjuntoB) or (x.pontoB in conjuntoB and x.pontoA not in conjuntoB):
+                    if x.peso < menor:
+                        aresta = x
+                        menor = x.peso
+            if (aresta.pontoA not in conjuntoB):
+                 conjuntoB.append(aresta.pontoA)
+            else:
+                conjuntoB.append(aresta.pontoB)
+            arvore.append(aresta)
+            if (len(conjuntoB) == len(self.__lista_de_Vertices)):
+                break
+        return arvore
+
+    def buscaPorArticulacao(self):
+        
