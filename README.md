@@ -36,10 +36,12 @@ Exemplo [10,2,5,9,3]
 Resultado no arquivo json
 
     {
-        "direcionado": "False",
-        "vertices": "b,j,t,k,w,x,y,z",
-        "arestas": "b-j,b-x,b-y,b-w,j-t,j-y,j-x,j-w,j-z,w-y,w-k,z-y,z-x,z-k,k-y,k-x,t-x,x-y",
-        "pesosAresta": [10,5,3,2,9,6,20,14,3,8,12,6,9,15,4,1,7,5]
+       "direcionado": false,
+        "vertices": ["a","b","c","d","e","f","g"],
+        "arestas": [
+            ["a","b"],["a","d"],["b","c"],["b","d"],["b","e"],["c","e"], ["c","f"],["d","e"],["d","g"],["e","f"],["e","g"],["f","g"]
+            ],
+        "pesosAresta": [1,4,2,6,4,5,6,3,4,8,7,3]
     }
  
 ## Inicialização

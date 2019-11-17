@@ -4,13 +4,10 @@ import json
 def iniciar_dados():
     with open('grafo.json') as f:
         data = json.load(f)
-    vertices = data['vertices'].split(",")
-    arestas = [tuple(aresta.split('-')) for aresta in data['arestas'].split(',')]
+    vertices = data['vertices']
+    arestas = data['arestas']
     pesosArestas = data['pesosAresta']
-    if data['direcionado'] == "True":
-        direcionado = True
-    else:
-        direcionado = False
+    direcionado = data['direcionado']
     return vertices, arestas, direcionado, pesosArestas
 
 def printar_inicialização(vertices, arestas):
