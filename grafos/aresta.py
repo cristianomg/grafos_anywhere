@@ -20,3 +20,6 @@ class Aresta:
 
 	def __str__(self):
 		return f'{self.__pontoA}-{self.__pontoB}: {self.__peso}'
+
+	def __repr__(self):
+		return self.__str__()

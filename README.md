@@ -87,3 +87,14 @@ A primeira forma será informado apenas o vertice de inicio e o algorimo irá mo
 vertices.
 A segunda forma será informado o vertice de inicio e o vertice final e o algoritmo ira mostrar todos os caminhos
 ate achar o menor caminho ate o vertice final</p>
+
+7 - ordenação topologica 
+<p> Essa função ordena os grafo dado um conjunto de dependencias (Arestas) de um grafo</p>
+
+8 - arvore geradora minima
+
+<p> gera a arvore geradora minima a partir de um grafo , a arvore geradora minima possui todos os vertices do grafo porém apenas as arestas que somadas dão o menor valor e não formem ciclos, para esse algoritmo foi desenvolvido a abordagem de Prim </p>
+
+9 - busca por articulação
+
+<p> dado um grafo e retornado os vertices que são articulações </p>

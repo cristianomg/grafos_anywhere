@@ -156,11 +156,13 @@ class Grafo:
         for i in self.__lista_de_Vertices:
             i.visitado = False
         result = []
+        pilhaPais = pilha.Pilha()
         self.pilha = pilha.Pilha()
         vertice = self.__select_vertice(vertice)
         print(vertice)
         vertice.visitado = True
         self.pilha.empilhar(vertice)
+        posicaoVisitado = 0
         while self.pilha.tamanho != 0:
             vertice = self.pilha.desempilhar()
             vertice.visitado = True
@@ -169,8 +171,21 @@ class Grafo:
                     if not self.pilha.contem(self.__lista_de_Adjacentes[vertice.nome][i]):
                         self.pilha.empilhar(self.__lista_de_Adjacentes[vertice.nome][i])
             if vertice.nome not in result:
-                result.append(vertice.nome)
-            print(self.pilha)
+                pai = pilhaPais.top()
+                while pai != None:
+                    pai = pilhaPais.top()
+                    if pai != None:
+                        if len(list(filter(lambda x: x.pontoA == pai.nome and x.pontoB == vertice.nome,
+                        self.__lista_de_Arestas))) > 0:
+                            vertice.pai = pai
+                            break
+                        else:
+                            pai = pilhaPais.desempilhar()
+                print(self.pilha)
+                pilhaPais.empilhar(vertice)
+                vertice.posicaoVisitado = posicaoVisitado
+                result.append(vertice)
+            posicaoVisitado += 1
         return result
 
     def bfs(self, vertice):
@@ -189,7 +204,7 @@ class Grafo:
                     self.fila.enfilerar(self.__lista_de_Adjacentes[v.nome][i])
             print(self.fila)
             if v.nome not in result:
-                result.append(v.nome)
+                result.append(v)
             self.fila.desenfilerar()
         return result
 
@@ -197,20 +212,18 @@ class Grafo:
         result_bool = False
         if algoritmo == 'bfs':
             result = self.bfs(self.__lista_de_Vertices[0].nome)
-            vertices = [vertice.nome for vertice in self.__lista_de_Vertices]
             result_bool = False
             print(result)
-            for i in vertices:
+            for i in self.__lista_de_Vertices:
                 if i in result:
                     result_bool = True
                 else:
                     result_bool = False
         elif algoritmo == "dfs":
             result = self.dfs(self.__lista_de_Vertices[0].nome)
-            vertices = [vertice.nome for vertice in self.__lista_de_Vertices]
             result_bool = False
             print(result)
-            for i in vertices:
+            for i in self.__lista_de_Vertices:
                 if i in result:
                     result_bool = True
                 else:
@@ -329,6 +342,30 @@ class Grafo:
             if (len(conjuntoB) == len(self.__lista_de_Vertices)):
                 break
         return arvore
+    
 
-    #def buscaPorArticulacao(self):
-
+    def buscaPorArticulacao(self):
+        articulacao = []
+        result = self.dfs(self.__lista_de_Vertices[0].nome)
+        print(result)
+        for vertice in result:
+            if vertice.pai == None:
+                filhos = list(filter(lambda x: x.pai == vertice, result))
+                if len(filhos) > 1:
+                    for filho in filhos:
+                        if list(filter(lambda x: x.pontoB == filho, self.__lista_de_Arestas)) == 1:
+                            articulacao.append(vertice)
+                            break
+            elif len(list(filter(lambda x: x.pai == vertice, result))) > 0:
+                ancestrais = list(filter(lambda x: x.posicaoVisitado < vertice.posicaoVisitado, result))
+                descendentes = list(filter(lambda x: x.posicaoVisitado > vertice.posicaoVisitado, result))
+                descendentes = list(filter(lambda x: x.pai.posicaoVisitado >= vertice.posicaoVisitado, descendentes ))
+                for ancestral in ancestrais:
+                    for descendente in descendentes:
+                        aresta = list(filter(lambda x: x.pontoA == ancestral.nome and
+                         x.pontoB == descendente.nome, self.__lista_de_Arestas))
+                        if len(aresta) == 0:
+                            if vertice not in articulacao:
+                                articulacao.append(vertice)
+        print("Articulações:", end=" ")
+        print(articulacao)

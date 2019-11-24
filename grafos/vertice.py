@@ -3,6 +3,8 @@ class Vertice:
 	def __init__(self, nome):
 		self.__nome = nome
 		self.__visitado = False
+		self.posicaoVisitado = 0
+		self.pai = None
 
 	@property
 	def nome(self):

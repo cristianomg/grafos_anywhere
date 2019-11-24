@@ -20,6 +20,12 @@ class Pilha:
         else:
             return None
 
+    def top(self):
+        if self.__elementos.tamanho >= 1:
+            elemento = self.__elementos.recuperar_elemento_no(self.__elementos.tamanho - 1)
+            return elemento
+        else:
+            return None     
     def contem(self, elemento):
         return self.__elementos.contem(elemento)
 

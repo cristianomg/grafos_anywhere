@@ -8,17 +8,19 @@ grafo = grafo.Grafo(direcionado)
 grafo.adicionar_vertice(vertices)
 grafo.adicionar_arestas(arestas, pesosArestas)
 
-print('-'*33, 'MENU DE FUNÇÕES', '-'*33)
-print('1 - Representação do grafo')
-print('2 - getAdjacentes')
-print('3 - ehRegular')
-print('4 - ehCompleto')
-print('5 - ehConexo')
-print('6 - Algoritmo do menor caminho')
-print('7 - Ordenação Topologica')
-print('8 - Arvore Geradora Minima')
+
 run = True
 while run:
+	print('-'*33, 'MENU DE FUNÇÕES', '-'*33)
+	print('1 - Representação do grafo')
+	print('2 - getAdjacentes')
+	print('3 - ehRegular')
+	print('4 - ehCompleto')
+	print('5 - ehConexo')
+	print('6 - Algoritmo do menor caminho')
+	print('7 - Ordenação Topologica')
+	print('8 - Arvore Geradora Minima')
+	print('9 - Busca por Articulação')
 
 	menu = int(input('Digite uma opção: '))
 	if menu == 1:
@@ -54,6 +56,8 @@ while run:
 		arvore = grafo.arvoreGeradoraMinima()
 		for x in arvore:
 			print (x)
+	elif menu == 9:
+		grafo.buscaPorArticulacao()
 	elif menu == 9:
 		run = False
 		
