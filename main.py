@@ -51,7 +51,7 @@ while run:
 			verticeInicio = input("digite o vertice de inicio")
 			grafo.dijkstra(verticeInicio)
 	elif menu == 7:
-		grafo.ordenacaoTopologica()
+		print(grafo.ordenacaoTopologica())
 	elif menu == 8:
 		arvore = grafo.arvoreGeradoraMinima()
 		for x in arvore:
